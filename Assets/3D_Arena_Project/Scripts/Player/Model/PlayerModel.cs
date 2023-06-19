@@ -114,9 +114,6 @@ public class PlayerModel : MonoBehaviour
         _playerView.ChangeBars(_health, _power);
     }
 
-
-
-
     public void CrossingBoundary()
     {
         if (_boundary)

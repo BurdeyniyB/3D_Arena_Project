@@ -38,19 +38,23 @@ public class Bullet : MonoBehaviour
 
         if (_ricochet == 0 && collision.gameObject.GetComponent<Enemy>())
         {
-            Destroy(collision.gameObject);
-            _playerModel.KillEnemy();
+            DestroyEnemy(collision.gameObject);
             StartCoroutine(UpdateList());
         }
         else
         {
             if(collision.gameObject.GetComponent<Enemy>())
             {
-                Destroy(collision.gameObject);
-                _playerModel.KillEnemy();
+                DestroyEnemy(collision.gameObject);
             }
             StartState();
         }
+    }
+
+    private void DestroyEnemy(GameObject enemy)
+    {
+        Destroy(enemy);
+        _playerModel.KillEnemy();
     }
 
     private void Bonus(GameObject enemy)
@@ -87,11 +91,9 @@ public class Bullet : MonoBehaviour
         int random = Random.Range(0, 100) + 1;
         if (random <= chance)
         {
-            Debug.Log("Chance");
             Vector3 vector3 = FindNearestEnemy();
             if (vector3 != Vector3.zero)
             {
-                Debug.Log("Chance S");
                 vector3 = (vector3 - transform.position).normalized * _shotPower;
                 _rb.velocity = vector3;
                 _ricochet = 1;
@@ -117,7 +119,6 @@ public class Bullet : MonoBehaviour
     {
         if (_enemies.Length == 0)
         {
-            Debug.Log("No enemies found.");
             return Vector3.zero;
         }
 
@@ -138,7 +139,6 @@ public class Bullet : MonoBehaviour
 
         if (nearestEnemy != null)
         {
-            Debug.Log($"nearestEnemy {nearestEnemy} nearestEnemy.transform.position {nearestEnemy.transform.position}");
             return nearestEnemy.transform.position;
         }
         return Vector3.zero;
