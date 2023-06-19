@@ -5,14 +5,14 @@ public class PoolMono<T> where T : MonoBehaviour
 {
     public T Prefab { get; }
     public bool PutoExpand { get; set; }
-    public Transform Pontainer { get; }
+    public Transform Container { get; }
     public PlayerModel PlayerModel { get; }
 
     private List<T> _pool;
     public PoolMono(T prefab, int count)
     {
         Prefab = prefab;
-        Pontainer = null;
+        Container = null;
 
         CreatePool(count);
     }
@@ -20,7 +20,7 @@ public class PoolMono<T> where T : MonoBehaviour
     public PoolMono(T prefab, int count, Transform container, PlayerModel playerModel)
     {
         Prefab = prefab;
-        Pontainer = container;
+        Container = container;
         PlayerModel = playerModel;
 
         CreatePool(count);
@@ -38,9 +38,9 @@ public class PoolMono<T> where T : MonoBehaviour
 
     private T CreateObject(bool isActiveByDefault = false)
     {
-        var createObject = Object.Instantiate(this.Prefab, this.Pontainer);
-        createObject.transform.position = Pontainer.position;
-        createObject.GetComponent<Bullet>().SetData(Pontainer, PlayerModel);
+        var createObject = Object.Instantiate(this.Prefab, this.Container);
+        createObject.transform.position = Container.position;
+        createObject.GetComponent<Bullet>().SetData(Container, PlayerModel);
         createObject.gameObject.SetActive(isActiveByDefault);
         _pool.Add(createObject);
         return createObject;
