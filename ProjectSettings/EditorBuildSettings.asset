@@ -9,5 +9,7 @@ EditorBuildSettings:
     path: Assets/3D_Arena_Project/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 30243eee6ad25194594ae1f1cf51a28e,
+      type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 0af4563c505595d429445667fbe299d6, type: 2}
