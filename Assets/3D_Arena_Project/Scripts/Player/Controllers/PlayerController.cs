@@ -5,10 +5,22 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerModel _playerModel;
+    [SerializeField] private PlayerView _playerView;
+
+    [SerializeField] private ControlCollision _controlCollision;
 
     [SerializeField] private FloatingJoystick _joystickMove;
     [SerializeField] private FloatingJoystick _joystickAngular;
 
+    private void OnEnable()
+    {
+        _controlCollision.TakeDamage += CollisionEnemy;
+    }
+
+    private void OnDisable()
+    {
+        _controlCollision.TakeDamage -= CollisionEnemy;
+    }
 
     private void FixedUpdate()
     {
@@ -22,9 +34,9 @@ public class PlayerController : MonoBehaviour
         _playerModel.NewQuaternion(_joystickAngular.Horizontal, _joystickAngular.Vertical);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void CollisionEnemy(string typeDamage, GameObject enemy)
     {
-        if (collision.gameObject.GetComponent<RedEnemy>()) { _playerModel.TakeDamage("Red Enemy"); Destroy(collision.gameObject); }
-        if (collision.gameObject.GetComponent<BlueBullet>()) { _playerModel.TakeDamage("Blue Bullet"); Destroy(collision.gameObject); }
+        _playerModel.TakeDamage(typeDamage);
+        _playerView.DestroyEnemy(enemy);   
     }
 }

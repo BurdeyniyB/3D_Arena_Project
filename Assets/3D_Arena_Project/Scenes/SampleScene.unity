@@ -854,6 +854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 338728400}
   - component: {fileID: 338728401}
+  - component: {fileID: 338728402}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -888,6 +889,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e67255d2b2d664a98af7f12fc5efd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &338728402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338728398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6398e06c8690b44d85c2f4d1e31fd28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerModel: {fileID: 1375209285}
+  _playerView: {fileID: 1375209286}
+  _controlCollision: {fileID: 1375209287}
+  _joystickMove: {fileID: 8170153793471028088}
+  _joystickAngular: {fileID: 8170153793356079389}
 --- !u!1 &409256262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2813,8 +2831,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerView: {fileID: 1375209286}
+  _factoryEnemy: {fileID: 503635202}
   _bullet: {fileID: 1477189379}
   _ulta: {fileID: 338728401}
+  _playerRigidBody: {fileID: 1375209284}
+  _boundary: {fileID: 1328875361}
+  _enemyTransform: []
   _moveSpeed: 1
   _rotateHorizontalSpeed: 50
   _rotateVerticalSpeed: 30
@@ -2830,6 +2852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f229da35b05c40c48a3f903c7eed58d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerModel: {fileID: 1375209285}
   _factoryEnemy: {fileID: 503635202}
   _boundary: {fileID: 1328875361}
   _healthText: {fileID: 2036014301}
@@ -2847,12 +2870,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1375209278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6398e06c8690b44d85c2f4d1e31fd28, type: 3}
+  m_Script: {fileID: 11500000, guid: 48a0871ca45ddac49a5e277d20ee19c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerModel: {fileID: 1375209285}
-  _joystickMove: {fileID: 8170153793471028088}
-  _joystickAngular: {fileID: 8170153793356079389}
 --- !u!1 &1392729722
 GameObject:
   m_ObjectHideFlags: 0
