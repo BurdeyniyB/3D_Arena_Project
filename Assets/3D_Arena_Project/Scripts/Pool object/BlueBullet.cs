@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BlueBullet : MonoBehaviour
 {
     [SerializeField] float _speed;
     [SerializeField] private Transform _playerTransform;
-    [SerializeField] private Vector3 _afterPlayerDisplacement;
-    [SerializeField] private Collider _boundary;
+    private Vector3 _afterPlayerDisplacement;
+    private Collider _boundary;
     private bool _playerDisplayment;
     private Rigidbody _rb;
 

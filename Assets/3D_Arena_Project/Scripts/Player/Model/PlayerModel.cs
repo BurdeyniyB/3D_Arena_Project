@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class PlayerModel : MonoBehaviour
 {
@@ -12,16 +11,18 @@ public class PlayerModel : MonoBehaviour
     [SerializeField] private FactoryEnemy _factoryEnemy;
     [SerializeField] private PoolExample _bullet;
     [SerializeField] private Ulta _ulta;
+
+    private MoveToRandomPositionOnPlatform _moveToRandomPositionOnPlatform;
     private AngleCorrection _angleCorrection = new AngleCorrection();
 
     [SerializeField] private Rigidbody _playerRigidBody;
     [SerializeField] private Collider _boundary;
 
-    [SerializeField] private List<Transform> _enemyTransform;
-
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _rotateHorizontalSpeed = 5f;
     [SerializeField] private float _rotateVerticalSpeed = 5f;
+
+    private List<Transform> _enemyTransform;
 
     private int _health = 100;
     private int _power = 50;
@@ -126,73 +127,13 @@ public class PlayerModel : MonoBehaviour
             {
                 Debug.Log("ConsequenceOfDisplacement0");
                 ConsequenceOfDisplacement();
-                MoveToRandomPositionOnPlatform();
+                _moveToRandomPositionOnPlatform = new MoveToRandomPositionOnPlatform(_boundary, _playerRigidBody, transform, _enemyTransform);
+                _moveToRandomPositionOnPlatform.Move();
             }
         }
     }
 
-    public void MoveToRandomPositionOnPlatform()
-    {
-        if (_boundary != null && _enemyTransform.Count > 0)
-        {
-            Vector3 randomPosition = GetRandomPositionOnPlatform();
-            Vector3 farthestPoint = FindFarthestPointFromEnemies(randomPosition);
 
-            _playerRigidBody.MovePosition(farthestPoint);
-        }
-    }
-
-    private Vector3 GetRandomPositionOnPlatform()
-    {
-        if (_boundary != null)
-        {
-            Bounds platformBounds = _boundary.bounds;
-
-            float randomX = Random.Range(platformBounds.min.x, platformBounds.max.x);
-            float randomZ = Random.Range(platformBounds.min.z, platformBounds.max.z);
-
-            Vector3 randomPosition = new Vector3(randomX, transform.position.y, randomZ);
-
-            randomPosition = ClampPositionWithinPlatform(randomPosition);
-
-            return randomPosition;
-        }
-
-        return transform.position;
-    }
-
-    private Vector3 ClampPositionWithinPlatform(Vector3 position)
-    {
-        if (_boundary != null)
-        {
-            Vector3 closestPoint = _boundary.ClosestPoint(position);
-            return closestPoint;
-        }
-
-        return position;
-    }
-
-    private Vector3 FindFarthestPointFromEnemies(Vector3 position)
-    {
-        Vector3 farthestPoint = position;
-        float maxDistance = 0f;
-
-        foreach (Transform enemyTransform in _enemyTransform)
-        {
-            if (enemyTransform != null)
-            {
-                float distance = Vector3.Distance(position, enemyTransform.position);
-
-                if (distance > maxDistance)
-                {
-                    maxDistance = distance;
-                    farthestPoint = position;
-                }
-            }
-        }
-
-        return farthestPoint;
-    }
 
     private void ConsequenceOfDisplacement()
     {

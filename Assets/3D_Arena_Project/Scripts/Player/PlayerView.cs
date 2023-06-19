@@ -48,5 +48,4 @@ public class PlayerView : MonoBehaviour
     {
         Destroy(enemy);
     }
-
 }
